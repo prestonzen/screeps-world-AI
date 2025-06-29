@@ -14,18 +14,31 @@ class Spawner {
     if (spawner.spawning != null) {
       return;
     }
-
+    
     // Spawner can not create a basic creep
     if (spawner.store[RESOURCE_ENERGY] < this.minimumCreepCost) {
       return;
     }
 
-    // Set a hierarchy of roles
+    // Set a hierarchy of roles with builder priority
     if (roleHarvester.canSpawn(spawner)) {
       roleHarvester.spawn(spawner);
+    } else if (this.shouldSpawnBuilder(spawner)) {
+      roleBuilder.spawn(spawner);
     } else if (roleUpgrader.canSpawn(spawner)) {
       roleUpgrader.spawn(spawner);
     }
+  }
+
+  shouldSpawnBuilder(spawner) {
+    // Check if we can spawn builders
+    if (!roleBuilder.canSpawn(spawner)) {
+      return false;
+    }
+
+    // Check for construction sites
+    const constructionSites = spawner.room.find(FIND_CONSTRUCTION_SITES);
+    return constructionSites.length > 0;
   }
 
   getStructures(room) {
