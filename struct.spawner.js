@@ -1,6 +1,7 @@
 const roleHarvester = require('./role.harvester');
 const roleUpgrader = require('./role.upgrader');
 const roleBuilder = require('./role.builder');
+const roleRepairman = require('./role.repairman');
 
 class Spawner {
   constructor() {
@@ -20,11 +21,13 @@ class Spawner {
       return;
     }
 
-    // Set a hierarchy of roles with builder priority
+    // Set a hierarchy of roles
     if (roleHarvester.canSpawn(spawner)) {
       roleHarvester.spawn(spawner);
     } else if (this.shouldSpawnBuilder(spawner)) {
       roleBuilder.spawn(spawner);
+    } else if (roleRepairman.canSpawn(spawner)) {
+      roleRepairman.spawn(spawner);
     } else if (roleUpgrader.canSpawn(spawner)) {
       roleUpgrader.spawn(spawner);
     }
