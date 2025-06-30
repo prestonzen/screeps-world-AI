@@ -6,5 +6,6 @@ module.exports = {
   Suicide: 'suicide',
   Move: 'move',
   Recharge: 'recharge',
-  Repair: 'repair'
+  Repair: 'repair',
+  Explore: 'explore'
 };

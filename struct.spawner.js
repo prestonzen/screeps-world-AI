@@ -2,6 +2,7 @@ const roleHarvester = require('./role.harvester');
 const roleUpgrader = require('./role.upgrader');
 const roleBuilder = require('./role.builder');
 const roleRepairman = require('./role.repairman');
+const roleExplorer = require('./role.explorer');
 
 class Spawner {
   constructor() {
