@@ -3,7 +3,7 @@ const STATUSES = require('./creep.status');
 
 const ROLE = 'harvester';
 const BODY_PARTS = [WORK, WORK, CARRY, MOVE];
-const MIN_AMOUNT = 2;
+const MIN_AMOUNT = 3;
 
 class RoleHarvester extends CreepBase {
   constructor() {
@@ -69,7 +69,7 @@ class RoleHarvester extends CreepBase {
           this.moveTo(creep, source, '#169612');
           break;
         case OK:
-          creep.say('🔋 charge');
+          creep.say('🔋');
           this.setStatus(creep, STATUSES.Recharge);
           this.removeCurrentTarget(creep);
           break;

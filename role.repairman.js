@@ -3,7 +3,7 @@ const STATUSES = require('./creep.status');
 
 const ROLE = 'repairman';
 const BODY_PARTS = [WORK, WORK, CARRY, MOVE];
-const MIN_AMOUNT = 1;
+const MIN_AMOUNT = 2;
 
 class RoleRepairman extends CreepBase {
   constructor() {
@@ -58,22 +58,13 @@ class RoleRepairman extends CreepBase {
     const targets = creep.room.find(FIND_STRUCTURES, {
       filter: object => {
         // Only repair structures that are damaged
-        if (object.hits >= object.hitsMax) return false;
-        
-        // Exclude walls and ramparts unless critically damaged (< 10% health)
-        if (object.structureType === STRUCTURE_WALL || object.structureType === STRUCTURE_RAMPART) {
-          return object.hits < object.hitsMax * 0.1;
-        }
-        
-        return true;
+        return object.hits < object.hitsMax;
       }
     });
 
-    // Sort by smallest missing health first (low hanging fruit)
+    // Sort by lowest current health first (most critical)
     targets.sort(function(a, b) {
-      const missingA = a.hitsMax - a.hits;
-      const missingB = b.hitsMax - b.hits;
-      return missingA - missingB;
+      return a.hits - b.hits;
     });
 
     if (targets.length > 0) {
@@ -81,7 +72,7 @@ class RoleRepairman extends CreepBase {
       if (result == ERR_NOT_IN_RANGE) {
         this.moveTo(creep, targets[0], '#ffff00');
       } else if (result == OK) {
-        creep.say('🔧 repair');
+        creep.say('🔧 ');
       }
       this.setStatus(creep, STATUSES.Repair);
     } else {

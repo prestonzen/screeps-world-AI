@@ -57,7 +57,7 @@ class CreepBase {
   }
 
   suicide(creep) {
-    creep.say('💀 suicide');
+    creep.say('💀 ');
     this.setStatus(creep, 'Suicide');
     creep.suicide();
 
@@ -83,7 +83,7 @@ class CreepBase {
         lineStyle: 'dotted',
       };
     }
-    creep.say(`🚙 move`);
+    creep.say(`🚙 `);
     creep.memory.currentTarget = target;
 
     return creep.moveTo(target, opts);
@@ -117,7 +117,7 @@ class CreepBase {
         this.moveTo(creep, source, '#ffaa00');
         break;
       case OK:
-        creep.say('🔄 harvest');
+        creep.say('⛏️');
         this.setStatus(creep, STATUSES.Harvest);
         this.removeCurrentTarget(creep);
         break;

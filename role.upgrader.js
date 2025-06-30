@@ -3,7 +3,7 @@ const STATUSES = require('./creep.status');
 
 const ROLE = 'upgrader';
 const BODY_PARTS = [WORK, WORK, CARRY, MOVE];
-const MIN_AMOUNT = 4;
+const MIN_AMOUNT = 7;
 
 class RoleUpgrader extends CreepBase {
   constructor() {
@@ -52,7 +52,7 @@ class RoleUpgrader extends CreepBase {
         this.moveTo(creep, creep.room.controller, '#169612');
         break;
       case OK:
-        creep.say('⚡ upgrade');
+        creep.say('⚡ ');
         this.setStatus(creep, STATUSES.Upgrade);
         this.removeCurrentTarget(creep);
         break;
